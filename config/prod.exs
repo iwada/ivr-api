@@ -16,6 +16,7 @@ config :ivr, IvrWeb.Endpoint,
   server: true,
   code_reloader: false,
   root: ".",
+  debug_errors: false,
   check_origin: false
 # Do not print debug messages in production
 config :logger, level: :info
