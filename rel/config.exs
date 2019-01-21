@@ -39,6 +39,7 @@ environment :prod do
   set include_src: false
   set cookie: :"9gdlb_|oM={N7iIo!GZDlPeTUduJ>6*Z!~H?92?ful./.@L=9g}d8dL&d4[<2u_K"
   set vm_args: "rel/vm.args"
+  set output_dir: "rel/ivr"
 end
 
 # You may define one or more releases in this file.
