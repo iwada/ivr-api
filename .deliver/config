@@ -1,0 +1,24 @@
+
+APP="ivr-api" # name of your release
+
+BUILD_HOST="35.185.121.230" # host where to build the release
+BUILD_USER="iwada" # local user at build host
+BUILD_AT="/tmp/ivr-api/builds" # build directory on build host
+
+STAGING_HOSTS="test1.acme.org test2.acme.org" # staging / test hosts separated by space
+STAGING_USER="test" # local user at staging hosts
+TEST_AT="/test/my-erlang-app" # deploy directory on staging hosts. default is DELIVER_TO
+
+PRODUCTION_HOSTS="35.185.121.230" # deploy / production hosts separated by space
+PRODUCTION_USER="iwada" # local user at deploy hosts
+DELIVER_TO="/home/iwada/ivr-api" # deploy directory on production hosts 
+
+
+pre_erlang_get_and_update_deps() {
+  local _prod_secret_path="/home/iwada/app_config/prod.secret.exs"
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    __sync_remote "
+      ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
+    "
+  fi
+}

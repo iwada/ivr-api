@@ -20,7 +20,7 @@ defmodule Ivr.MixProject do
   def application do
     [
       mod: {Ivr.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools,:edeliver]
     ]
   end
 
@@ -44,8 +44,10 @@ defmodule Ivr.MixProject do
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
       {:guardian, "~> 1.0"},
-      {:distillery, "~> 1.3"},
-      {:bootleg, "~> 0.7", runtime: false},
+      {:edeliver, ">= 1.6.0"},
+      {:distillery, "~> 2.0", warn_missing: false}
+  
+      #{:bootleg, "~> 0.7", runtime: false},
       #{:bootleg, "~> 0.5"}
     ]
   end
