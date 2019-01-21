@@ -22,3 +22,6 @@ pre_erlang_get_and_update_deps() {
     "
   fi
 }
+
+
+ AUTO_VERSION=build-date+build-time+commit-count+git-revision+branch-unless-master

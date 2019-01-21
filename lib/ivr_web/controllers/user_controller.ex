@@ -8,8 +8,9 @@ defmodule IvrWeb.UserController do
 
   action_fallback(IvrWeb.FallbackController)
 
-  def create(conn, params) do
-    with {:ok, %User{} = user} <- Accounts.create_user(params) do
+
+  def create(conn, %{"user" => user_params}) do
+    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
       new_conn = Guardian.Plug.sign_in(conn, user)
       jwt = Guardian.Plug.current_token(new_conn)
 
