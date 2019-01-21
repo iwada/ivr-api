@@ -26,5 +26,5 @@ use Bootleg.Config
 #  ```
 # For more about `bootleg_phoenix` see: https://github.com/labzero/bootleg_phoenix
 
-role :build, "35.185.121.230", user: "iwada", identity: "~/.ssh/id_rsa", workspace: "/tmp/bootleg/build", silently_accept_hosts: true
+role :build, "35.185.121.230", user: "iwada", password: "iwadaaccess", workspace: "/tmp/bootleg/build", silently_accept_hosts: true
 role :app, "35.185.121.230", user: "iwada", identity: "~/.ssh/id_rsa", workspace: "/home/iwada/ivr_api", silently_accept_hosts: true

@@ -45,7 +45,8 @@ defmodule Ivr.MixProject do
       {:argon2_elixir, "~> 1.2"},
       {:guardian, "~> 1.0"},
       {:distillery, "~> 1.3"},
-      {:bootleg, "~> 0.5"}
+      {:bootleg, "~> 0.7", runtime: false},
+      #{:bootleg, "~> 0.5"}
     ]
   end
 
