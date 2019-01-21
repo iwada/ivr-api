@@ -1,5 +1,5 @@
 
-APP="ivr-api" # name of your release
+APP="ivr" # name of your release
 
 BUILD_HOST="35.185.121.230" # host where to build the release
 BUILD_USER="iwada" # local user at build host
