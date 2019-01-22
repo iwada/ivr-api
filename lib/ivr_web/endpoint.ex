@@ -40,5 +40,6 @@ defmodule IvrWeb.Endpoint do
     key: "_ivr_key",
     signing_salt: "cblPqKF/"
 
+  plug CORSPlug
   plug IvrWeb.Router
 end
