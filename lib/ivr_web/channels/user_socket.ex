@@ -5,6 +5,9 @@ defmodule IvrWeb.UserSocket do
   #channel "room:*", IvrWeb.RoomChannel
   channel "event:lobby", IvrWeb.EventChannel
 
+  transport :websocket, Phoenix.Transports.WebSocket,
+  check_origin: false
+
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
