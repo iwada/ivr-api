@@ -2,6 +2,7 @@ defmodule IvrWeb.Router do
   use IvrWeb, :router
 
   pipeline :api do
+    plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
   end
 
@@ -14,6 +15,7 @@ defmodule IvrWeb.Router do
 
     post("/sessions", SessionController, :create)
     post("/users", UserController, :create)
+    get "/api/v1", UserController, :index
   end
 
    scope "/api/v1", IvrWeb do

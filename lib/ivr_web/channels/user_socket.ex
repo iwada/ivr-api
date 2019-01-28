@@ -2,7 +2,9 @@ defmodule IvrWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", IvrWeb.RoomChannel
+  #channel "room:*", IvrWeb.RoomChannel
+  channel "event:lobby", IvrWeb.EventChannel
+
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
@@ -24,7 +26,7 @@ defmodule IvrWeb.UserSocket do
   #     def id(socket), do: "user_socket:#{socket.assigns.user_id}"
   #
   # Would allow you to broadcast a "disconnect" event and terminate
-  # all active sockets and channels for a given user:
+  # all active sockets and channels for a given user:user
   #
   #     IvrWeb.Endpoint.broadcast("user_socket:#{user.id}", "disconnect", %{})
   #

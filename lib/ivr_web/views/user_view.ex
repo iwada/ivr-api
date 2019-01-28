@@ -8,4 +8,11 @@ defmodule IvrWeb.UserView do
       email: user.email
     }
   end
+
+
+   def render("test_dump.json",_) do
+    %{
+      
+    }
+  end
 end
