@@ -2,7 +2,7 @@ defmodule IvrWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :ivr
 
   socket "/socket", IvrWeb.UserSocket,
-    websocket: true,
+    websocket: [check_origin: false],
     longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
