@@ -46,7 +46,9 @@ defmodule Ivr.MixProject do
       {:guardian, "~> 1.0"},
       {:edeliver, ">= 1.6.0"},
       {:distillery, "~> 2.0", warn_missing: false},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:phoenix_client, "~> 0.3"},
+     {:websocket_client, "~> 1.3"}
   
       #{:bootleg, "~> 0.7", runtime: false},
       #{:bootleg, "~> 0.5"}
