@@ -15,7 +15,8 @@ defmodule IvrWeb.Router do
 
     post("/sessions", SessionController, :create)
     post("/users", UserController, :create)
-    get "/", UserController, :index
+    post("/", EventController, :create)
+  
   end
 
    scope "/api/v1", IvrWeb do
