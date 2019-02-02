@@ -16,7 +16,7 @@ defmodule IvrWeb.EventView do
       host: event.host,
       source: event.source,
       transcription: event.transcription,
-      sipcallid: event.sipcallid,
+      sipcallid: event.sipCallID,
       confidence: event.confidence,
       index: event.index}
   end

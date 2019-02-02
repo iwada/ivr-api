@@ -4,14 +4,18 @@ defmodule Ivr.Repo.Migrations.CreateEvents do
   def change do
     create table(:events, primary_key: false) do
       add :id, :binary_id, primary_key: true
-      add :time, :string
+      add :time, :integer
       add :host, :string
       add :source, :string
+      add :sourcetype, :string
+      add :sipToURI, :string
       add :transcription, :string
-      add :sipcallid, :string
-      add :confidence, :string
+      add :sipCallID, :string
+      add :sipFromURI, :string
+      add :confidence, :float
       add :index, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      add :is_session_new, :boolean, default: false, null: false
+      add :user_id, references(:users, on_delete: :nothing, type: :uuid)
 
       timestamps()
     end

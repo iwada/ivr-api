@@ -9,7 +9,6 @@ defmodule IvrWeb.UserController do
   action_fallback(IvrWeb.FallbackController)
 
   def index(conn, user_params) do
-    IO.inspect conn
     conn 
     |> put_status(:no_content)
     |> render("test_dump.json")
@@ -19,7 +18,6 @@ defmodule IvrWeb.UserController do
     with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
       new_conn = Guardian.Plug.sign_in(conn, user)
       jwt = Guardian.Plug.current_token(new_conn)
-
       new_conn
       |> put_status(:created)
       |> put_view(IvrWeb.SessionView)

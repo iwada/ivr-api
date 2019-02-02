@@ -18,6 +18,8 @@ defmodule Ivr.Telephony do
      Repo.all(user_events(user))
    end
 
+  
+
   @doc """
   Returns the list of events.
 
@@ -113,4 +115,121 @@ defmodule Ivr.Telephony do
   def change_event(%Event{} = event) do
     Event.changeset(event, %{})
   end
+
+  alias Ivr.Telephony.InwardDial
+
+  @doc """
+  Returns the list of inwarddials.
+
+  ## Examples
+
+      iex> list_inwarddials()
+      [%InwardDial{}, ...]
+
+  """
+  def list_inwarddials do
+    Repo.all(InwardDial)
+  end
+
+  @doc """
+  Gets a single inward_dial.
+
+  Raises `Ecto.NoResultsError` if the Inward dial does not exist.
+
+  ## Examples
+
+      iex> get_inward_dial!(123)
+      %InwardDial{}
+
+      iex> get_inward_dial!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_inward_dial!(id), do: Repo.get!(InwardDial, id)
+
+  @doc """
+  Creates a inward_dial.
+
+  ## Examples
+
+      iex> create_inward_dial(%{field: value})
+      {:ok, %InwardDial{}}
+
+      iex> create_inward_dial(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_inward_dial(attrs \\ %{}, user) do
+    %InwardDial{}
+    user
+    |> Ecto.build_assoc(:inwarddials)
+    |> InwardDial.changeset(attrs)
+    |> Repo.insert()
+  end
+  @doc """
+  Updates a inward_dial.
+
+  ## Examples
+
+      iex> update_inward_dial(inward_dial, %{field: new_value})
+      {:ok, %InwardDial{}}
+
+      iex> update_inward_dial(inward_dial, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_inward_dial(%InwardDial{} = inward_dial, attrs) do
+    inward_dial
+    |> InwardDial.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a InwardDial.
+
+  ## Examples
+
+      iex> delete_inward_dial(inward_dial)
+      {:ok, %InwardDial{}}
+
+      iex> delete_inward_dial(inward_dial)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_inward_dial(%InwardDial{} = inward_dial) do
+    Repo.delete(inward_dial)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking inward_dial changes.
+
+  ## Examples
+
+      iex> change_inward_dial(inward_dial)
+      %Ecto.Changeset{source: %InwardDial{}}
+
+  """
+  def change_inward_dial(%InwardDial{} = inward_dial) do
+    InwardDial.changeset(inward_dial, %{})
+  end
+
+  #Get event_provisioned_did
+  def get_provisioned_did_owner(direct_inward_dial_number) do
+     if result = Repo.get_by(InwardDial, direct_inward_dial_number: direct_inward_dial_number) |> Repo.preload(:user)  do 
+        result.user
+     else
+      "" ###TODO We need to default this to maybe an admin user
+     end
+  end
+
+  # Check if event Session is new
+  def is_session_new?(sip_session_id) do
+      query = from e in "events",
+          where: e.sipCallID == ^sip_session_id
+      Repo.exists?(query)
+  end
+
+  def is_session_new(sip_session_id) when sip_session_id == nil, do: "" 
+
 end
+

@@ -11,6 +11,7 @@ defmodule Ivr.Accounts.User do
     field :password_hash, :string
     field :password, :string, virtual: true
     has_many :events, Ivr.Telephony.Event
+    has_many :inwarddials, Ivr.Telephony.InwardDial
     timestamps()
   end
 

@@ -15,8 +15,7 @@ defmodule IvrWeb.Router do
 
     post("/sessions", SessionController, :create)
     post("/users", UserController, :create)
-    post("/", EventController, :create)
-  
+    resources("/events", EventController, except: [:new, :edit])
   end
 
    scope "/api/v1", IvrWeb do
@@ -24,6 +23,7 @@ defmodule IvrWeb.Router do
 
     delete("/sessions", SessionController, :delete)
     post("/sessions/refresh", SessionController, :refresh)
+    resources("/dids", InwardDialController, except: [:new, :edit])
   end
 
 

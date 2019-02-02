@@ -73,4 +73,65 @@ defmodule Ivr.TelephonyTest do
       assert %Ecto.Changeset{} = Telephony.change_event(event)
     end
   end
+
+  describe "inwarddials" do
+    alias Ivr.Telephony.InwardDial
+
+    @valid_attrs %{direct_inward_dial_number: "some direct_inward_dial_number", status: true}
+    @update_attrs %{direct_inward_dial_number: "some updated direct_inward_dial_number", status: false}
+    @invalid_attrs %{direct_inward_dial_number: nil, status: nil}
+
+    def inward_dial_fixture(attrs \\ %{}) do
+      {:ok, inward_dial} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Telephony.create_inward_dial()
+
+      inward_dial
+    end
+
+    test "list_inwarddials/0 returns all inwarddials" do
+      inward_dial = inward_dial_fixture()
+      assert Telephony.list_inwarddials() == [inward_dial]
+    end
+
+    test "get_inward_dial!/1 returns the inward_dial with given id" do
+      inward_dial = inward_dial_fixture()
+      assert Telephony.get_inward_dial!(inward_dial.id) == inward_dial
+    end
+
+    test "create_inward_dial/1 with valid data creates a inward_dial" do
+      assert {:ok, %InwardDial{} = inward_dial} = Telephony.create_inward_dial(@valid_attrs)
+      assert inward_dial.direct_inward_dial_number == "some direct_inward_dial_number"
+      assert inward_dial.status == true
+    end
+
+    test "create_inward_dial/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Telephony.create_inward_dial(@invalid_attrs)
+    end
+
+    test "update_inward_dial/2 with valid data updates the inward_dial" do
+      inward_dial = inward_dial_fixture()
+      assert {:ok, %InwardDial{} = inward_dial} = Telephony.update_inward_dial(inward_dial, @update_attrs)
+      assert inward_dial.direct_inward_dial_number == "some updated direct_inward_dial_number"
+      assert inward_dial.status == false
+    end
+
+    test "update_inward_dial/2 with invalid data returns error changeset" do
+      inward_dial = inward_dial_fixture()
+      assert {:error, %Ecto.Changeset{}} = Telephony.update_inward_dial(inward_dial, @invalid_attrs)
+      assert inward_dial == Telephony.get_inward_dial!(inward_dial.id)
+    end
+
+    test "delete_inward_dial/1 deletes the inward_dial" do
+      inward_dial = inward_dial_fixture()
+      assert {:ok, %InwardDial{}} = Telephony.delete_inward_dial(inward_dial)
+      assert_raise Ecto.NoResultsError, fn -> Telephony.get_inward_dial!(inward_dial.id) end
+    end
+
+    test "change_inward_dial/1 returns a inward_dial changeset" do
+      inward_dial = inward_dial_fixture()
+      assert %Ecto.Changeset{} = Telephony.change_inward_dial(inward_dial)
+    end
+  end
 end
