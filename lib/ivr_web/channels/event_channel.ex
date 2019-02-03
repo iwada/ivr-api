@@ -65,7 +65,7 @@ end
 
 
   def broadcast_change(event) do
-   user_id =  Telephony.get_event_user(event.id)
+   user_id =  Ivr.Telephony.get_event_user(event.id)
   payload = %{
     "time" => event.time,
     "host" => event.host,
