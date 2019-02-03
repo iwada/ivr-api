@@ -38,7 +38,15 @@ defmodule Ivr.Accounts do
  # def get_user!(id), do: Repo.get!(User, id)
    def get_user(id), do: Repo.get(User, id)
 
+  # Handle inproper uuid in request
+   def get_user_uuid(id) do
+     case Ecto.UUID.cast(id) do
+      {:ok, uuid} -> Repo.get(User, id)
+      :error -> nil
+      end
+ end
 
+  
   @doc """
   Creates a user.
 

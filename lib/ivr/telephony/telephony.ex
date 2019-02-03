@@ -48,7 +48,8 @@ defmodule Ivr.Telephony do
 
   """
   def get_event!(id), do: Repo.get!(Event, id)
-
+  def get_event_user(id), do: Repo.get(Event, id) |> Repo.preload(:user)
+    
   @doc """
   Creates a event.
 

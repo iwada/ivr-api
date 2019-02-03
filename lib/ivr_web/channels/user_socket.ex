@@ -3,7 +3,7 @@ defmodule IvrWeb.UserSocket do
 
   ## Channels
   #channel "room:*", IvrWeb.RoomChannel
-  channel "event:lobby", IvrWeb.EventChannel
+  channel "event:*", IvrWeb.EventChannel
 
 
   # Socket params are passed from the client and can

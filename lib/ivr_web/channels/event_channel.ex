@@ -1,13 +1,47 @@
 defmodule IvrWeb.EventChannel do
   use IvrWeb, :channel
+  require IEx
 
-  def join("event:lobby", payload, socket) do
-    if authorized?(payload) do
-      {:ok, socket}
-    else
-      {:error, %{reason: "unauthorized"}}
-    end
+  # def join("event:" <> user_id, payload, socket) do
+  #   if authorized?(payload) do
+  #     {:ok, socket}
+  #   else
+  #     {:error, %{reason: "unauthorized"}}
+  #   end
+  # end
+
+
+def join("event:" <> user_id, payload, socket) do
+  if authorized?(payload) do
+   # IEx.pry
+      case Ivr.Accounts.get_user_uuid(user_id) |>  Ivr.Repo.preload(:events) do
+        nil ->  {:error, %{reason: "channel: No such user #{user_id}"}}
+        event ->
+          {:ok, events_to_map(event.events), socket}
+      end
+  else
+    {:error, %{reason: "unauthorized"}}
   end
+end
+
+
+defp events_to_map(events) do
+  Enum.each events, fn event -> 
+  %{
+    "time" => event.time,
+    "host" => event.host,
+    "source" => event.source,
+    "sourcetype" => event.sourcetype,
+    "index" => event.transcription,
+    "transcription" => event.transcription,
+    "sipCallID" => event.sipCallID,
+    "sipToURI" => event.sipToURI,
+    "sipFromURI" => event.sipFromURI,
+    "confidence"=> event.confidence,
+    "is_session_new?" => event.is_session_new
+  }
+end
+end
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
@@ -31,6 +65,7 @@ defmodule IvrWeb.EventChannel do
 
 
   def broadcast_change(event) do
+   user_id =  Telephony.get_event_user(event.id)
   payload = %{
     "time" => event.time,
     "host" => event.host,
@@ -44,7 +79,7 @@ defmodule IvrWeb.EventChannel do
     "confidence"=> event.confidence,
     "is_session_new?" => event.is_session_new
   }
-  IvrWeb.Endpoint.broadcast("event:lobby", "daniel", payload)
+  IvrWeb.Endpoint.broadcast("event:#{user_id}", "vgw_transcription", payload)
   # Process.sleep(10_000)
   # broadcast_change("event")
 end
