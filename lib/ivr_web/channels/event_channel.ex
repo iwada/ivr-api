@@ -65,7 +65,7 @@ end
 
 
   def broadcast_change(event) do
-   user_id =  Ivr.Telephony.get_event_user(event.id)
+   user_id =  Ivr.Telephony.get_event_user(event.id).user_id
   payload = %{
     "time" => event.time,
     "host" => event.host,
@@ -79,7 +79,8 @@ end
     "confidence"=> event.confidence,
     "is_session_new?" => event.is_session_new
   }
-  IvrWeb.Endpoint.broadcast("event:#{user_id}", "vgw_transcription", payload)
+ # IEx.pry
+ IvrWeb.Endpoint.broadcast("event:#{user_id}", "vgw_transcription", payload)
   # Process.sleep(10_000)
   # broadcast_change("event")
 end
