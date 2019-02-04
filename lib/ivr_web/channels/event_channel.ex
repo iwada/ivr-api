@@ -100,9 +100,9 @@ end
   # broadcast_change("event")
 end
 
-def broadcast_sipCallID(event) do
+def broadcast_sipCallID(sipCallID) do
   payload = %{
-    "sipCallID" => event.sipCallID
+    "sipCallID" => sipCallID
   }
  IvrWeb.Endpoint.broadcast("event:sipCallID", "sipCallID", payload)
 end
