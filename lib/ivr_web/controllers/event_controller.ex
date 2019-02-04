@@ -24,10 +24,14 @@ defmodule IvrWeb.EventController do
         "time" => conn.params["time"],
         "is_session_new" => !Telephony.is_session_new?(event_params["sipCallID"])
       })
+      if !Telephony.is_session_new?(event_params["sipCallID"]), do: IvrWeb.EventChannel.broadcast_sipCallID(event)
+     # if !Telephony.is_session_new?(event_params["sipCallID"]), do: IO.puts "NEW session"
+
     with {:ok, %Event{} = event} <- Telephony.create_event(new_event_params, event_owner) do
      
       # There's a Possiblity of using GenEvent for this. TODO
-      if !Telephony.is_session_new?(event_params["sipCallID"]), do: IvrWeb.EventChannel.broadcast_sipCallID(event)
+      #IEx.pry
+      #if !Telephony.is_session_new?(event_params["sipCallID"]), do: IvrWeb.EventChannel.broadcast_sipCallID(event)
       IvrWeb.EventChannel.broadcast_change(event)
       #IEx.pry
       conn
