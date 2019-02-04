@@ -11,13 +11,19 @@ defmodule IvrWeb.EventView do
   end
 
   def render("event.json", %{event: event}) do
-    %{id: event.id,
-      time: event.time,
-      host: event.host,
-      source: event.source,
-      transcription: event.transcription,
+    %{
       sipcallid: event.sipCallID,
-      confidence: event.confidence,
-      index: event.index}
+      }
   end
+
+  # def render("event.json", %{event: event}) do
+  #   %{id: event.id,
+  #     time: event.time,
+  #     host: event.host,
+  #     source: event.source,
+  #     transcription: event.transcription,
+  #     sipcallid: event.sipCallID,
+  #     confidence: event.confidence,
+  #     index: event.index}
+  # end
 end

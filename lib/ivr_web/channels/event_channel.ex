@@ -2,22 +2,37 @@ defmodule IvrWeb.EventChannel do
   use IvrWeb, :channel
   require IEx
 
-  # def join("event:" <> user_id, payload, socket) do
-  #   if authorized?(payload) do
-  #     {:ok, socket}
-  #   else
-  #     {:error, %{reason: "unauthorized"}}
-  #   end
-  # end
+  def join("event:sipCallID", payload, socket) do
+    if authorized?(payload) do
+      {:ok, socket}
+    else
+      {:error, %{reason: "unauthorized"}}
+    end
+  end
 
 
-def join("event:" <> user_id, payload, socket) do
+# def join("event:" <> user_id, payload, socket) do
+#   if authorized?(payload) do
+#    # IEx.pry
+#       case Ivr.Accounts.get_user_uuid(user_id) |>  Ivr.Repo.preload(:events) do
+#         nil ->  {:error, %{reason: "channel: No such user #{user_id}"}}
+#         event ->
+#           {:ok, events_to_map(event.events), socket}
+#       end
+#   else
+#     {:error, %{reason: "unauthorized"}}
+#   end
+# end
+
+
+def join("event:" <> event_id, payload, socket) do
   if authorized?(payload) do
    # IEx.pry
-      case Ivr.Accounts.get_user_uuid(user_id) |>  Ivr.Repo.preload(:events) do
-        nil ->  {:error, %{reason: "channel: No such user #{user_id}"}}
+      case Ivr.Telephony.get_event_by(event_id) do
+        nil ->  {:error, %{reason: "channel: No such event #{event_id}"}}
+        [] ->  {:error, %{reason: "channel: No such event #{event_id}"}}
         event ->
-          {:ok, events_to_map(event.events), socket}
+          {:ok, events_to_map(event), socket}
       end
   else
     {:error, %{reason: "unauthorized"}}
@@ -65,7 +80,7 @@ end
 
 
   def broadcast_change(event) do
-   user_id =  Ivr.Telephony.get_event_user(event.id).user_id
+   #user_id =  Ivr.Telephony.get_event_user(event.id).user_id
   payload = %{
     "time" => event.time,
     "host" => event.host,
@@ -80,9 +95,16 @@ end
     "is_session_new?" => event.is_session_new
   }
  # IEx.pry
- IvrWeb.Endpoint.broadcast("event:#{user_id}", "vgw_transcription", payload)
+ IvrWeb.Endpoint.broadcast("event:#{event.sipCallID}", "vgw_transcription", payload)
   # Process.sleep(10_000)
   # broadcast_change("event")
+end
+
+def broadcast_sipCallID(sipCallID) do
+  payload = %{
+    "sipCallID" => sipCallID,
+  }
+ IvrWeb.Endpoint.broadcast("event:sipCallID", "sipCallID", payload)
 end
 
   # Add authorization logic here as required.

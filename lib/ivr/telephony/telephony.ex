@@ -11,13 +11,24 @@ defmodule Ivr.Telephony do
 
 
   defp user_events(user) do
-    assoc(user, :events)  |> order_by(desc: :id)
+    assoc(user, :events)  
   end
 
   def list_events(user) do
-     Repo.all(user_events(user))
-   end
+    #Repo.all(user_events(user)) 
+    target_records =  from(r in Ivr.Telephony.Event, where: r.user_id == ^user.id ,  distinct: r.sipCallID) |> Repo.all
 
+  end
+
+  # def get_event_by(sipCallID) do
+  #   target_records =  from(r in Ivr.Telephony.Event, where: r.sipCallID == ^sipCallID )
+  #   target_records |> Ecto.Query.first |> Repo.one
+  # end
+
+    def get_event_by(sipCallID) do
+    target_records =  from(r in Ivr.Telephony.Event, where: r.sipCallID == ^sipCallID )
+    target_records |> Repo.all
+    end
   
 
   @doc """

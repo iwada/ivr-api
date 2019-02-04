@@ -10,13 +10,6 @@ defmodule IvrWeb.Router do
     plug(Ivr.Auth.Pipeline)
   end
 
-  scope "/api/v1", IvrWeb do
-    pipe_through :api
-
-    post("/sessions", SessionController, :create)
-    post("/users", UserController, :create)
-    resources("/events", EventController, except: [:new, :edit])
-  end
 
    scope "/api/v1", IvrWeb do
     pipe_through([:api, :api_auth])
@@ -24,6 +17,16 @@ defmodule IvrWeb.Router do
     delete("/sessions", SessionController, :delete)
     post("/sessions/refresh", SessionController, :refresh)
     resources("/dids", InwardDialController, except: [:new, :edit])
+    get("/events/sip_call_ids", EventController, :index)
+  end
+
+
+  scope "/api/v1", IvrWeb do
+    pipe_through :api
+
+    post("/sessions", SessionController, :create)
+    post("/users", UserController, :create)
+    resources("/events", EventController, except: [:new, :edit,:index])
   end
 
 

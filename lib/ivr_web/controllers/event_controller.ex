@@ -7,7 +7,8 @@ defmodule IvrWeb.EventController do
   action_fallback IvrWeb.FallbackController
 
   def index(conn, _params) do
-    events = Telephony.list_events()
+   current_user =  Guardian.Plug.current_resource(conn)
+    events = Telephony.list_events(current_user)
     render(conn, "index.json", events: events)
   end
 
@@ -26,6 +27,7 @@ defmodule IvrWeb.EventController do
     with {:ok, %Event{} = event} <- Telephony.create_event(new_event_params, event_owner) do
      
       # There's a Possiblity of using GenEvent for this. TODO
+      if !Telephony.is_session_new?(event_params["sipCallID"]), do: IvrWeb.EventChannel.broadcast_sipCallID(event)
       IvrWeb.EventChannel.broadcast_change(event)
       #IEx.pry
       conn
