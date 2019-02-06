@@ -14,6 +14,6 @@ role(:app, "35.185.121.230",
 	 identity: "~/.ssh/id_rsa",
 	 workspace: "/home/iwada/ivr-api", 
 	 silently_accept_hosts: true,
-	 release_workspace: "/tmp/bootleg"
+	 release_workspace: "/tmp/bootleg/build"
 	 )
 

@@ -31,7 +31,7 @@ role(:build, "35.185.121.230",
 	 identity: "~/.ssh/id_rsa", 
 	 workspace: "/tmp/bootleg/build", 
 	 silently_accept_hosts: true,
-	 release_workspace: "/tmp/bootleg"
+	 release_workspace: "/tmp/bootleg/build"
 	 )
 #role :app, "35.185.121.230", user: "iwada", identity: "~/.ssh/id_rsa", workspace: "/home/dev/ivr-api", silently_accept_hosts: true
 
