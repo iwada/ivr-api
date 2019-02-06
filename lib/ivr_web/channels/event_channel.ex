@@ -101,6 +101,7 @@ end
 end
 
 def broadcast_sipCallID(sipCallID,host,sipToURI,sipFromURI) do
+  #Initially only sipCallID was sent, Daniel - the UI guys says he needs the other three. So sending them to fulfil all righteousness
   payload = %{
     "sipCallID" => sipCallID,
     "host" => host,

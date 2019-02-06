@@ -44,15 +44,16 @@ defmodule Ivr.MixProject do
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
       {:guardian, "~> 1.0"},
-      {:edeliver, ">= 1.6.0"},
+     # {:edeliver, ">= 1.6.0"},
       {:distillery, "~> 2.0", warn_missing: false},
       {:cors_plug, "~> 2.0"},
       {:phoenix_client, "~> 0.3", only: :dev},
      {:websocket_client, "~> 1.3", only: :dev},
-     {:faker_elixir_octopus, "~> 1.0.0"}
+     {:faker_elixir_octopus, "~> 1.0.0"},
   
       #{:bootleg, "~> 0.7", runtime: false},
       #{:bootleg, "~> 0.5"}
+     {:bootleg, "~> 0.10", runtime: false}
     ]
   end
 
