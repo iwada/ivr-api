@@ -26,7 +26,13 @@ use Bootleg.DSL
 #  ```
 # For more about `bootleg_phoenix` see: https://github.com/labzero/bootleg_phoenix
 
-role :build, "35.185.121.230", user: "iwada", identity: "~/.ssh/id_rsa", workspace: "/tmp/bootleg/build", silently_accept_hosts: true
+role(:build, "35.185.121.230",
+	 user: "iwada", 
+	 identity: "~/.ssh/id_rsa", 
+	 workspace: "/tmp/bootleg/build", 
+	 silently_accept_hosts: true,
+	 release_workspace: "/home/iwada"
+	 )
 #role :app, "35.185.121.230", user: "iwada", identity: "~/.ssh/id_rsa", workspace: "/home/dev/ivr-api", silently_accept_hosts: true
 
 
