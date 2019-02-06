@@ -31,15 +31,14 @@ environment :dev do
   # dev mode.
   set dev_mode: true
   set include_erts: false
-  set cookie: :"2[6pitR;*f`z5[./=,>STS0BbX^Lm4?QIUCCSv{0y}`pkX?@,gaW=jk<}g==hem5"
+  set cookie: :";F&<JG&/O0LxW5e.{dti(uw]{w43ruH0MOoi7zK&Md9oeAq,joq6s8*8p[ofqn;|"
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :"9gdlb_|oM={N7iIo!GZDlPeTUduJ>6*Z!~H?92?ful./.@L=9g}d8dL&d4[<2u_K"
+  set cookie: :"j_gp7_~WL^ZqtP/pf<Z<GkXUvO@eu(9Nj_GScLL<3kv{xMBH6Zh7K)L`v$tut%&V"
   set vm_args: "rel/vm.args"
-  set output_dir: "rel/ivr"
 end
 
 # You may define one or more releases in this file.

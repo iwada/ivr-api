@@ -53,7 +53,8 @@ defmodule Ivr.MixProject do
   
       #{:bootleg, "~> 0.7", runtime: false},
       #{:bootleg, "~> 0.5"}
-     {:bootleg, "~> 0.10", runtime: false}
+     #{:bootleg, "~> 0.10", runtime: false}
+     {:bootleg, git: "https://github.com/labzero/bootleg.git", runtime: false}
     ]
   end
 
