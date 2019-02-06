@@ -20,7 +20,7 @@ defmodule Ivr.MixProject do
   def application do
     [
       mod: {Ivr.Application, []},
-      extra_applications: [:logger, :runtime_tools,:edeliver]
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
