@@ -18,12 +18,13 @@ defmodule IvrWeb.Router do
     post("/sessions/refresh", SessionController, :refresh)
     resources("/dids", InwardDialController, except: [:new, :edit])
     get("/events/sip_call_ids", EventController, :index)
+
   end
 
 
   scope "/api/v1", IvrWeb do
     pipe_through :api
-
+    get "/verify", UserController, :verify_email
     post("/sessions", SessionController, :create)
     post("/users", UserController, :create)
     resources("/events", EventController, except: [:new, :edit,:index])

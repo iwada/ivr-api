@@ -26,9 +26,7 @@ defmodule IvrWeb.EventController do
       })
       if !Telephony.is_session_new?(event_params["sipCallID"]), do: IvrWeb.EventChannel.broadcast_sipCallID(event_params["sipCallID"],
         conn.params["host"],event_params["sipToURI"],event_params["sipFromURI"])
-     # if !Telephony.is_session_new?(event_params["sipCallID"]), do: IO.puts "NEW session"
-
-    with {:ok, %Event{} = event} <- Telephony.create_event(new_event_params, event_owner) do
+      with {:ok, %Event{} = event} <- Telephony.create_event(new_event_params, event_owner) do
      
       # There's a Possiblity of using GenEvent for this. TODO
       #IEx.pry
@@ -49,7 +47,6 @@ defmodule IvrWeb.EventController do
 
   def update(conn, %{"id" => id, "event" => event_params}) do
     event = Telephony.get_event!(id)
-
     with {:ok, %Event{} = event} <- Telephony.update_event(event, event_params) do
       render(conn, "show.json", event: event)
     end
@@ -57,7 +54,6 @@ defmodule IvrWeb.EventController do
 
   def delete(conn, %{"id" => id}) do
     event = Telephony.get_event!(id)
-
     with {:ok, %Event{}} <- Telephony.delete_event(event) do
       send_resp(conn, :no_content, "")
     end

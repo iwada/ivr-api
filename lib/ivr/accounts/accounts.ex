@@ -44,7 +44,23 @@ defmodule Ivr.Accounts do
       {:ok, uuid} -> Repo.get(User, id)
       :error -> nil
       end
- end
+    end
+
+
+  def user_verification_status(user_id) do
+   user = get_user(user_id)
+  {:ok, user}
+  end
+
+   @doc """ 
+
+   Marks a User as verified 
+
+   """
+
+   def mark_as_verified(user) do
+    Ivr.Accounts.get_user(user.id) |> User.changeset(%{verified: true}) |> Repo.update()
+   end
 
   
   @doc """

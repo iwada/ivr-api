@@ -10,9 +10,15 @@ defmodule IvrWeb.UserView do
   end
 
 
-   def render("test_dump.json",_) do
+   def render("verified.json",_) do
     %{
       
+    }
+  end
+
+  def render("not_verified.json",_) do
+    %{
+      error: "Already Verified / Verification Code Expired"
     }
   end
 end

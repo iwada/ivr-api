@@ -10,6 +10,7 @@ defmodule Ivr.Accounts.User do
     field :name, :string
     field :password_hash, :string
     field :password, :string, virtual: true
+    field :verified, :boolean, default: false
     has_many :events, Ivr.Telephony.Event
     has_many :inwarddials, Ivr.Telephony.InwardDial
     timestamps()
@@ -18,7 +19,7 @@ defmodule Ivr.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password_hash])
+    |> cast(attrs, [:name, :email, :password_hash,:verified])
     |> validate_required([:name, :email])
     |> unique_constraint(:email)
     |> validate_length(:name, min: 2, max: 255)

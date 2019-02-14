@@ -33,3 +33,9 @@ import_config "#{Mix.env()}.exs"
 config :ivr, Ivr.Auth.Guardian,
   issuer: "ivr",
   secret_key: "BpECYLrYrwiTU1SbUVJjDdTHodXYkihnPIEJGlIt7UyqDNl7M/5YFVLTyDJZT16d"
+
+config :ivr, Ivr.Mailer,
+  adapter: Swoosh.Adapters.Mailgun,
+  api_key: "key-3hm2dwo3ikx01y7855te-ty3g-rvh7d1",
+  domain: "notifications.twalle.com"
+

@@ -15,7 +15,7 @@ defmodule Ivr.Repo.Migrations.CreateEvents do
       add :confidence, :float
       add :index, :string
       add :is_session_new, :boolean, default: false, null: false
-      add :user_id, references(:users, on_delete: :nothing, type: :uuid)
+      add :user_id, references(:users, on_delete: :delete_all, type: :uuid)
 
       timestamps()
     end
