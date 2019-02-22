@@ -3,6 +3,7 @@ defmodule IvrWeb.EventChannel do
   require IEx
 
   def join("event:sipCallID", payload, socket) do
+    IEx.pry
     if authorized?(payload) do
       {:ok, socket}
     else
@@ -113,6 +114,10 @@ end
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do
+    #get current User from payloag - Account.get_user()
+    #get all Events of current user - 
+    # check if event exists in returned list - Enum.member?(["foo", "bar"], "foo")
+    #return true
     true
   end
 

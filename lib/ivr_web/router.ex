@@ -18,6 +18,7 @@ defmodule IvrWeb.Router do
     post("/sessions/refresh", SessionController, :refresh)
     resources("/dids", InwardDialController, except: [:new, :edit])
     get("/events/sip_call_ids", EventController, :index)
+    get("/users/check_verified", UserController, :check_verified)
 
   end
 

@@ -33,6 +33,16 @@ defmodule IvrWeb.UserController do
   #   # We'll update this later
   # end
 
+  def check_verified(conn, _params) do
+     current_user =  Guardian.Plug.current_resource(conn)
+     case current_user.verified do
+
+        true -> send_resp(conn, :created,"Verified")
+
+       _ -> send_resp(conn, :no_content, "")
+         
+     end
+  end
 
   def verify_email(conn, %{"token" => token}) do
     with {:ok, user_id} <- Ivr.Auth.Token.verify_new_account_token(token),
