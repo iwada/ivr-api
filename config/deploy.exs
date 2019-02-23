@@ -35,4 +35,8 @@ role(:build, "35.185.121.230",
 	 )
 #role :app, "35.185.121.230", user: "iwada", identity: "~/.ssh/id_rsa", workspace: "/home/dev/ivr-api", silently_accept_hosts: true
 
-
+ # #{:ok, _} = Application.ensure_all_started(:ivr)
+ # path = Application.app_dir(:ivr, "priv/repo/migrations")
+ # #Ecto.Migrator.run(Ivr.Repo, path, :up, all: true)
+ # migrator = Ecto.Migrator
+ # migrator.run(Ivr.Repo, path, :up, all: true)
