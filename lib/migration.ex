@@ -37,7 +37,8 @@ defmodule Ivr.ReleaseTasks do
   defp run_migrations_for(repo) do
     app = Keyword.get(repo.config, :otp_app)
     IO.puts("Running migrations for #{app}")
-    Ecto.Migrator.run(repo, migrations_path(repo), :up, all: true)
+    migrations_path = priv_path_for(repo, "migrations")
+    Ecto.Migrator.run(repo, migrations_path, :up, all: true)
   end
 
   def rollback do
@@ -61,7 +62,8 @@ defmodule Ivr.ReleaseTasks do
   defp run_rollbacks_for(repo, step) do
     app = Keyword.get(repo.config, :otp_app)
     IO.puts("Running rollbacks for #{app} (STEP=#{step})")
-    Ecto.Migrator.run(repo, migrations_path(repo), :down, all: false, step: step)
+    migrations_path = priv_path_for(repo, "migrations")
+    Ecto.Migrator.run(repo, migrations_path, :down, all: false, step: step)
   end
 
   defp prepare do
