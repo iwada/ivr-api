@@ -39,7 +39,7 @@ environment :prod do
   set include_src: false
   set cookie: :"j_gp7_~WL^ZqtP/pf<Z<GkXUvO@eu(9Nj_GScLL<3kv{xMBH6Zh7K)L`v$tut%&V"
   set vm_args: "rel/vm.args"
-  set post_start_hooks: "rel/hooks/post_start"
+  #set post_start_hooks: "rel/hooks/post_start"
 end
 
 # You may define one or more releases in this file.
@@ -58,6 +58,11 @@ release :ivr do
   #   "migrate": "rel/commands/migrate.sh",
   #   "rollback": "rel/commands/rollback.sh",
   # ]
+
+  set commands: [
+    migrate: "rel/commands/migrate.sh",
+    seed: "rel/commands/seed.sh",
+  ]
 
 
 end
