@@ -12,5 +12,5 @@ done
 set -e
 
 echo "Running migrations"  
-bin/ivr rpc Elixir.Ivr.ReleaseTasks migrate  
+ 
 echo "Migrations run successfully"
