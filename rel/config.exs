@@ -53,11 +53,11 @@ release :ivr do
     :runtime_tools
   ]
 
-  # set commands: [
-  #   "seed": "rel/commands/seed.sh",
-  #   "migrate": "rel/commands/migrate.sh",
-  #   "rollback": "rel/commands/rollback.sh",
-  # ]
+  set commands: [
+    "seed": "rel/commands/seed.sh",
+    "migrate": "rel/commands/migrate.sh",
+    "rollback": "rel/commands/rollback.sh",
+  ]
 
 
 end
