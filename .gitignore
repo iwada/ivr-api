@@ -36,3 +36,4 @@ ivr-*.tar
 /config/*.secret.exs
 
 .deliver/releases
+.deliver/releases/
