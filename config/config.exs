@@ -39,6 +39,5 @@ config :ivr, Ivr.Mailer,
   api_key: "key-3hm2dwo3ikx01y7855te-ty3g-rvh7d1",
   domain: "notifications.twalle.com"
 
-config :ivr, Repo,
-   pool_size: 5
+  
 
