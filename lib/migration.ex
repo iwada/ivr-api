@@ -69,7 +69,7 @@ defmodule Ivr.ReleaseTasks do
   defp prepare do
     IO.puts("Loading #{@app}..")
     # Load the code for myapp, but don't start it
-    :ok = Application.load(@app)
+  #  :ok = Application.load(@app)
 
     IO.puts("Starting dependencies..")
     # Start apps necessary for executing migrations
