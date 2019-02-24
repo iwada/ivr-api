@@ -124,13 +124,7 @@ defmodule Ivr.ReleaseTasks do
   defp start_services do
     IO.puts("Starting dependencies..")
     # Start apps necessary for executing migrations
-   # Enum.each(@start_apps, &Application.ensure_all_started/1)
-
-    {:ok, _} = Application.ensure_all_started(:ecto_sql)
-    {:ok, _} = Application.ensure_all_started(:ssl)
-    {:ok, _} = Application.ensure_all_started(:crypto)
-    {:ok, _} = Application.ensure_all_started(:postgrex)
-    {:ok, _} = Application.ensure_all_started(:ecto)
+    Enum.each(@start_apps, &Application.ensure_all_started/1)
 
     # Start the Repo(s) for app
     IO.puts("Starting repos..")
