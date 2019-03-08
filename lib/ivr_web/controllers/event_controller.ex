@@ -24,10 +24,12 @@ defmodule IvrWeb.EventController do
         "source" => conn.params["source"],
         "sourcetype" => conn.params["sourcetype"],
         "time" => conn.params["time"],
-        "is_session_new" => !Telephony.is_session_new?(event_params["sipCallID"]),
+       # "is_session_new" => !Telephony.is_session_new?(event_params["sipCallID"]),
+        "is_session_new" => !Telephony.is_session_new?(sipCallID),
         "sipCallID" => striped_sipcallid
       })
-      if !Telephony.is_session_new?(event_params["sipCallID"]), do: IvrWeb.EventChannel.broadcast_sipCallID(event_params["sipCallID"],
+     # if !Telephony.is_session_new?(event_params["sipCallID"]), do: IvrWeb.EventChannel.broadcast_sipCallID(event_params["sipCallID"],
+      if !Telephony.is_session_new?(sipCallID), do: IvrWeb.EventChannel.broadcast_sipCallID(sipCallID,
         conn.params["host"],event_params["sipToURI"],event_params["sipFromURI"])
       with {:ok, %Event{} = event} <- Telephony.create_event(new_event_params, event_owner) do
      

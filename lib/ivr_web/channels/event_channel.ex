@@ -82,6 +82,8 @@ end
 
   def broadcast_change(event) do
    #user_id =  Ivr.Telephony.get_event_user(event.id).user_id
+   sipCallID = event.sipCallID || ""
+   striped_sipcallid  = String.replace(sipCallID, "sip:", "") |> String.split("@") |> hd || ""
   payload = %{
     "time" => event.time,
     "host" => event.host,
@@ -89,7 +91,7 @@ end
     "sourcetype" => event.sourcetype,
     "index" => event.transcription,
     "transcription" => event.transcription,
-    "sipCallID" => event.sipCallID,
+    "sipCallID" => sipCallID,
     "sipToURI" => event.sipToURI,
     "sipFromURI" => event.sipFromURI,
     "confidence"=> event.confidence,
