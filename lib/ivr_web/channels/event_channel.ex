@@ -91,6 +91,7 @@ end
     "sourcetype" => event.sourcetype,
     "index" => event.transcription,
     "transcription" => event.transcription,
+    #"sipCallID" => event.sipCallID,
     "sipCallID" => sipCallID,
     "sipToURI" => event.sipToURI,
     "sipFromURI" => event.sipFromURI,
@@ -98,7 +99,8 @@ end
     "is_session_new?" => event.is_session_new
   }
  # IEx.pry
- IvrWeb.Endpoint.broadcast("event:#{event.sipCallID}", "vgw_transcription", payload)
+ #IvrWeb.Endpoint.broadcast("event:#{event.sipCallID}", "vgw_transcription", payload)
+ IvrWeb.Endpoint.broadcast("event:#{sipCallID}", "vgw_transcription", payload)
   # Process.sleep(10_000)
   # broadcast_change("event")
 end
