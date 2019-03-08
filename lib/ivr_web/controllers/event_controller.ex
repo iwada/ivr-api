@@ -14,6 +14,8 @@ defmodule IvrWeb.EventController do
 
   def create(conn, %{"event" => event_params}) do
    sipToURI =  event_params["sipToURI"] || ""
+   sipCallID = event_params["sipCallID"] || ""
+   striped_sipcallid  = String.replace(sipCallID, "sip:", "") |> String.split("@") |> hd || ""
    provisioned_did = String.replace(sipToURI, "sip:", "") |> String.split("@") |> hd || ""
     event_owner = Telephony.get_provisioned_did_owner(provisioned_did)
     new_event_params = Map.merge(event_params, %{
@@ -22,7 +24,8 @@ defmodule IvrWeb.EventController do
         "source" => conn.params["source"],
         "sourcetype" => conn.params["sourcetype"],
         "time" => conn.params["time"],
-        "is_session_new" => !Telephony.is_session_new?(event_params["sipCallID"])
+        "is_session_new" => !Telephony.is_session_new?(event_params["sipCallID"]),
+        "sipCallID" => striped_sipcallid
       })
       if !Telephony.is_session_new?(event_params["sipCallID"]), do: IvrWeb.EventChannel.broadcast_sipCallID(event_params["sipCallID"],
         conn.params["host"],event_params["sipToURI"],event_params["sipFromURI"])
