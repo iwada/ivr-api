@@ -3,7 +3,7 @@ defmodule IvrWeb.EventChannel do
   require IEx
 
   def join("event:sipCallID", payload, socket) do
-    IEx.pry
+    #IEx.pry
     if authorized?(payload) do
       {:ok, socket}
     else
