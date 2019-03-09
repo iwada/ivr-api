@@ -42,7 +42,7 @@ end
 
 
 defp events_to_map(events) do
-  Enum.each events, fn event -> 
+  Enum.map events, fn event -> 
   %{
     "time" => event.time,
     "host" => event.host,
@@ -92,7 +92,7 @@ end
     "index" => event.transcription,
     "transcription" => event.transcription,
     #"sipCallID" => event.sipCallID,
-    "sipCallID" => sipCallID,
+    "sipCallID" => striped_sipcallid,
     "sipToURI" => event.sipToURI,
     "sipFromURI" => event.sipFromURI,
     "confidence"=> event.confidence,
